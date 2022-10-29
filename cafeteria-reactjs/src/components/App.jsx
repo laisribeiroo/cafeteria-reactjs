@@ -1,19 +1,27 @@
+import{ useRef, useState } from 'react';
+
+import data from '../models/foods';
 import Food from './Food';
 
-function App() {
-  const foods = [
-  {
-    id: 1,
-    name: 'Hambúrguer',
-    image: 'imgs/hamburguer.jpg',
-  },
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
 
-  {
-    id: 2,
-    name: 'Suco',
-    image: 'imgs/suco.jpg',
-  },
-];
+function App() {
+  const [foods, setFoods] = useState(data);
+
+  const buttonAdd = useRef(null);
+
+const handleClick = () => {
+
+  const food = {
+    id: 3,
+    name: 'Batata',
+    image: 'imgs/batatafrita.jpg',
+  }
+  setFoods([...foods,food]);
+
+  buttonAdd.current.disabled = true;
+};
 
 
   return (
@@ -25,6 +33,8 @@ function App() {
     className="btn btn-secondary rounded-circle mr-4 font-weight-bold"
     data-toggle="modal" 
     data-target="#formFoodModal" 
+    onClick={handleClick}
+    ref={buttonAdd}
     >
       +
     </button>
